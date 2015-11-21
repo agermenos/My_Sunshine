@@ -12,4 +12,9 @@ public class FormatUtil {
         SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(pattern);
         return DATE_FORMAT.format(date);
     }
+
+    public static String getPrettyDate(String dateInMillis, String pattern){
+        String prettyDate = FormatUtil.formatDate(new Date(new Long(dateInMillis)*1000), pattern);
+        return prettyDate;
+    }
 }

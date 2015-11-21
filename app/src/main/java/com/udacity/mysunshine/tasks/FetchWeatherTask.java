@@ -17,6 +17,7 @@ public class FetchWeatherTask extends AsyncTask<WeatherParams, Void, WeatherAPIR
     private final static String LOG_TAG = FetchWeatherTask.class.getSimpleName();
 
     private MainActivityFragment caller=null;
+    private String jsonResponse;
 
     public FetchWeatherTask(MainActivityFragment caller){
         super();
@@ -27,7 +28,7 @@ public class FetchWeatherTask extends AsyncTask<WeatherParams, Void, WeatherAPIR
     protected WeatherAPIResponse doInBackground(WeatherParams... params) {
         try {
             WeatherWebService wws = new WeatherWebService();
-            String jsonResponse = wws.getJSONWeatherByParameters(params[0]);
+            jsonResponse = wws.getJSONWeatherByParameters(params[0]);
             WeatherParser parser = new WeatherParser();
             return parser.parse(jsonResponse);
         }
@@ -40,6 +41,6 @@ public class FetchWeatherTask extends AsyncTask<WeatherParams, Void, WeatherAPIR
     @Override
     protected void onPostExecute(WeatherAPIResponse response) {
         super.onPostExecute(response);
-        caller.setFetchWeatherTaskValues(response);
+        caller.setFetchWeatherTaskValues(response, jsonResponse);
     }
 }

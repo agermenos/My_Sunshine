@@ -2,10 +2,7 @@ package com.udacity.mysunshine.api;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.udacity.mysunshine.params.WeatherParams;
-import com.udacity.mysunshine.pojos.Weather;
-import com.udacity.mysunshine.pojos.WeatherAPIResponse;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,14 +10,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
 
 /**
  * Created by Alejandro on 11/15/15.
  */
 public class WeatherWebService {
     private final String logTag="WeatherWebService";
-    private Gson gson=new Gson();
 
     public String getJSONWeatherByParameters(WeatherParams params){
         WeatherAPI weatherAPI=new WeatherAPI();
