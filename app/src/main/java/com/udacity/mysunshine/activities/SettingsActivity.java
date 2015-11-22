@@ -23,7 +23,6 @@ import android.support.v4.app.NavUtils;
 
 import com.udacity.mysunshine.R;
 
-import java.util.List;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -122,6 +121,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        addPreferencesFromResource(R.xml.pref_general);
         setupActionBar();
     }
 
@@ -154,15 +154,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     @Override
     public boolean onIsMultiPane() {
         return isXLargeTablet(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public void onBuildHeaders(List<Header> target) {
-        loadHeadersFromResource(R.xml.pref_headers, target);
     }
 
     /**

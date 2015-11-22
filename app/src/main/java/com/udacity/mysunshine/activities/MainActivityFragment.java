@@ -26,7 +26,6 @@ import com.udacity.mysunshine.utils.FormatUtil;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -90,10 +89,13 @@ public class MainActivityFragment extends Fragment {
 
     private void updateWeather(){
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String locationPref = sharedPref.getString(getString(R.string.pref_zip_code_key), getString(R.string.pref_default_display_zip_code));
+        String locationPref = sharedPref.getString(getString(R.string.pref_zip_code_key),
+                getString(R.string.pref_default_display_zip_code));
+        String tempPref = sharedPref.getString(getString(R.string.pref_units_key),
+                getString(R.string.pref_units_default));
         WeatherParams wp = new WeatherParams();
         wp.setCnt("7"); wp.setMode("json"); wp.setQuery(locationPref);
-        wp.setUnits("F");
+        wp.setUnits(tempPref);
         FetchWeatherTask weatherTask = new FetchWeatherTask(this);
         weatherTask.execute(wp);
     }
