@@ -15,7 +15,5 @@
         android:entries="@array/pref_units_titles"
         android:entryValues="@array/pref_units_values"
         android:key="@string/pref_units_key"
-        android:negativeButtonText="@null"
-        android:positiveButtonText="@null"
         android:title="@string/pref_title_units" />
 </PreferenceScreen>

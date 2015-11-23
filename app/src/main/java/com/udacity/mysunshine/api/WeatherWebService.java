@@ -21,7 +21,7 @@ public class WeatherWebService {
         WeatherAPI weatherAPI=new WeatherAPI();
         weatherAPI.api(params.getApi()).cnt(params.getCnt())
                 .mode(params.getMode()).type(params.getType())
-                .query(params.getQuery());
+                .units(params.getUnits()).query(params.getQuery());
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
 

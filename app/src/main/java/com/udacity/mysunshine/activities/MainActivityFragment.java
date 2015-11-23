@@ -2,11 +2,13 @@ package com.udacity.mysunshine.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,6 +35,7 @@ import java.util.List;
  */
 public class MainActivityFragment extends Fragment {
 
+    private static final String LOG_TAG = "MainActivityFragment";
     ArrayAdapter mArrayAdapter;
     List<String> weekData;
     String jsonResponse;
@@ -65,7 +68,7 @@ public class MainActivityFragment extends Fragment {
                 getActivity(), R.layout.list_item_forecast, R.id.textview_forcaste_item, weekData);
         ListView listView = (ListView) rootView.findViewById(R.id.listview_forecast);
         if (mArrayAdapter!=null) {
-            listView.setAdapter((ArrayAdapter) mArrayAdapter);
+            listView.setAdapter(mArrayAdapter);
         }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -110,7 +113,27 @@ public class MainActivityFragment extends Fragment {
             updateWeather();
             return true;
         }
+        if (id == R.id.action_map) {
+            openPreferredLocationInMap();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openPreferredLocationInMap() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String locationPref = sharedPref.getString(getString(R.string.pref_zip_code_key),
+                getString(R.string.pref_default_display_zip_code));
+        Uri geoLocation= Uri.parse("geo:0,0?").buildUpon()
+                .appendQueryParameter("q", locationPref).build();
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(geoLocation);
+        if (intent.resolveActivity(getActivity().getPackageManager())!=null){
+            getActivity().startActivity(intent);
+        }
+        else {
+            Log.e(LOG_TAG, "Can't find the ACTION_VIEW intent");
+        }
     }
 
     // Callback method for AsyncTask

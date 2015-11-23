@@ -38,6 +38,10 @@ public class WeatherAPI {
         if (query!=null) this.query=query;
         return this;
     }
+    public WeatherAPI units(String units){
+        if (units!=null) this.units=units;
+        return this;
+    }
     public String build(){
         StringBuilder stringBuilder=new StringBuilder(BASE);
         stringBuilder.append(this.version);
